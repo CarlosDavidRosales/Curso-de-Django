@@ -7,11 +7,19 @@
 <ul>
     {% for task in tasks %}
     <li>
-        <h1>{{task.tarea}}</h1>
+        <a href="{% url 'task_detail' task.id %}">
+
+            {% if task.completado %}
+                <h1 style="color: dodgerblue;">{{task.tarea}}</h1>
+            {% else %}
+                <h1 style="color: red;">{{task.tarea}}</h1>
+            {% endif %}
+            
+        </a>
         <p>{{task.fecha}}</p>
-        <p>{{task.completado}}</p>
+        <p>{{task.user}}</p>
     </li>
     {% endfor %}
 </ul>
-
+{{error}}
 {% endblock %}

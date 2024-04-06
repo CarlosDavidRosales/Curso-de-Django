@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -78,3 +78,19 @@ def create_task(request):
                 'form': TareasForm,
                 'error': 'Bad data passed in. Try again.'
             })
+            
+            
+def task_detail(request, task_id):
+    if request.method == 'GET':
+        task = get_object_or_404(Tareas, pk=task_id)
+        form = TareasForm(instance=task)
+        return render(request, 'task_detail.html', {'task': task, 'form': form})
+    else:
+        try:
+            task = get_object_or_404(Tareas, pk=task_id)
+            form = TareasForm(request.POST, instance=task)
+            form.save()
+            return redirect('main')
+        except Exception as e:
+            print(e)
+            return render(request, 'task_detail.html', {'task': task, 'form': form, 'error': 'Error updating taks'})

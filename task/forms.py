@@ -4,4 +4,4 @@ from .models import Tareas
 class TareasForm(ModelForm):
     class Meta:
         model = Tareas
-        fields = ['tarea', 'fecha']
+        fields = ['tarea', 'fecha', 'completado']

@@ -10,9 +10,10 @@
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/main">main</a></li>
             {% if user.is_authenticated %}
+            <li><a href="/main">main</a></li>
             <li><a href="/logout">logout</a></li>
+            <li><a href="/main/create/">create task</a></li>
             {% else %}
             <li><a href="/signup">signup</a></li>
             <li><a href="/signin">signin</a></li>
